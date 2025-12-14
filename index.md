@@ -2,7 +2,7 @@
 title: Portfolio – Ingénieur Systèmes
 ---
 
-# 👨‍💻 [Prénom Nom]
+# 👨‍💻 [Romain LETOT]
 ### Ingénieur Systèmes / Infrastructure
 
 Administrateur systèmes avec **8 ans d’expérience**, spécialisé dans la **conception, l’automatisation et l’évolution d’infrastructures fiables, sécurisées et scalables**.  
@@ -12,19 +12,19 @@ Ce portfolio présente une sélection de **projets techniques majeurs** réalis�
 
 ## 🎯 Profil
 - Expertise systèmes Linux & Windows
-- Forte orientation **automatisation & fiabilité**
+- Forte orientation **sécurité & Windows Server**
 - Capacité à intervenir sur des **environnements complexes et critiques**
 - Approche orientée **architecture, performance et sécurité**
+- Gestion et optimisation des process
 
 ---
 
 ## 🧠 Compétences clés
-- Administration systèmes (Linux / Windows Server)
+- Administration systèmes (Linux RHEL, Debian / Windows Server)
 - Virtualisation & infrastructures hybrides
-- Cloud (AWS / Azure / GCP)
 - Automatisation & scripting
 - Supervision, haute disponibilité, sécurité
-- Support niveau 3 / expertise
+- Support niveau 2 et 3 / expertise
 
 ---
 
@@ -41,37 +41,41 @@ Ce portfolio présente une sélection de **projets techniques majeurs** réalis�
 
 ## 📁 Projets majeurs
 
-### 🔹 Migration et modernisation d’infrastructure
-**Contexte :** Infrastructure on-premise vieillissante avec des incidents récurrents  
-**Objectif :** Améliorer la disponibilité, la sécurité et la maintenabilité  
-**Rôle :** Ingénieur systèmes référent  
+### 🔹 Patching OS et applicatif sur le parc Windows serveur
+**Contexte :** Infrastructure on-premise
+**Objectif :** Améliorer le déploiement et l'application des patchs système Windows et applicatifs  
+**Rôle :** Administrateur systèmes référent pour la partie Microsoft Windows Server et applicatif. 
 
 **Actions principales :**
-- Analyse de l’existant et définition de l’architecture cible
-- Mise en place de l’automatisation
-- Sécurisation et supervision des environnements
-- Documentation et transfert de compétences
+- Analyse de l’existant
+- Priorisation des déploiments critique
+- Mise en place des tâches de déploiement des patchs OS
+- Mise en place des tâches de déploiement des patchs applicatif
+- Documentation et transfert de compétences sur la gestion des lots, des patchs et des tâches.
 
 **Résultats :**
-- Réduction significative des incidents
-- Déploiements plus rapides et standardisés
+- Amélioration de la compliance sur les patchs OS
+- Déploiements automatisé des patchs par lot (Pilote, Recette et Production)
+- Maintien à jour des applications
+- Amélioration de la sécurité du SI
 
 ➡️ *[Voir le détail du projet](projects.md)*
 
 ---
 
-### 🔹 Automatisation des déploiements systèmes
-**Contexte :** Déploiements manuels chronophages et sources d’erreurs  
-**Objectif :** Standardiser et fiabiliser les installations  
+### 🔹 Automatisation des déploiements systèmes Windows Postes et Serveurs
+**Contexte :** Déploiements manuels chronophages et sources d’erreurs,  
+**Objectif :** Standardiser et fiabiliser les installations des postes et serveurs à destination des clients 
 
 **Actions :**
-- Écriture de scripts et playbooks
+- Etude du besoin et des prérequis
 - Industrialisation des déploiements
 - Mise en place de contrôles et logs
 
 **Résultats :**
-- Temps de déploiement divisé par X
+- Temps de déploiement divisé par 10
 - Diminution des erreurs humaines
+- 
 
 ➡️ *[Voir le détail du projet](projects.md)*
 
@@ -86,10 +90,10 @@ Ce portfolio présente une sélection de **projets techniques majeurs** réalis�
 ---
 
 ## 📄 CV & Liens
-📎 **CV PDF** : [Lien vers ton CV]  
-🔗 **LinkedIn** : [Lien LinkedIn]  
+📎 **CV PDF** : []  
+🔗 **LinkedIn** : [www.linkedin.com/in/romain-letot-250185138]  
 💻 **GitHub** : [Lien GitHub]
 
 ---
 
-*Dernière mise à jour : [mois / année]*
+*Dernière mise à jour : [12 / 2025]*
