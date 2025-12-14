@@ -1,7 +1,3 @@
----
-title: Portfolio – Ingénieur Systèmes
----
-
 # 👨‍💻 [Romain LETOT]
 ### Ingénieur Systèmes / Infrastructure
 
@@ -91,7 +87,7 @@ Ce portfolio présente une sélection de **projets techniques majeurs** réalis�
 
 ## 📄 CV & Liens
 📎 **CV PDF** : *[Mon CV](CV_Romain_LETOT.pdf)*  
-🔗 **LinkedIn** : *[Mon LinkedIn](www.linkedin.com/in/romain-letot-250185138)* 
+🔗 **LinkedIn** : *[Mon LinkedIn](www.linkedin.com/in/romain-letot-250185138)*
 💻 **GitHub** : [Lien GitHub]
 
 ---
