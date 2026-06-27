@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Romain LETOT — Ingénieur Systèmes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1117;
+      --bg-2:      #161b22;
+      --bg-3:      #1c2230;
+      --border:    #30363d;
+      --blue:      #58a6ff;
+      --green:     #3fb950;
+      --yellow:    #e3b341;
+      --red:       #f85149;
+      --purple:    #a371f7;
+      --text:      #e6edf3;
+      --text-muted:#7d8590;
+      --text-dim:  #484f58;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── TOPBAR terminal ── */
+    #topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 32px;
+      background: #010409;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      z-index: 100;
+    }
+    .tb-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .tb-dot.r { background: var(--red); }
+    .tb-dot.y { background: var(--yellow); }
+    .tb-dot.g { background: var(--green); }
+    .tb-path { color: var(--blue); margin-left: 8px; }
+    .tb-sep  { color: var(--text-dim); }
+    .tb-right { margin-left: auto; display: flex; gap: 16px; }
+    .tb-pill {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 8px;
+      color: var(--green);
+    }
+
+    /* ── SIDEBAR ── */
+    #sidebar {
+      position: fixed;
+      top: 32px;
+      left: 0;
+      width: 240px;
+      height: calc(100vh - 32px);
+      background: var(--bg-2);
+      border-right: 1px solid var(--border);
+      padding: 28px 0 20px;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .sb-avatar {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 auto 12px;
+      flex-shrink: 0;
+    }
+
+    .sb-name {
+      text-align: center;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .sb-role {
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      margin-bottom: 20px;
+    }
+
+    .sb-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 16px 16px;
+    }
+
+    .sb-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      padding: 0 20px 6px;
+    }
+
+    .sb-nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 20px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: background .15s, color .15s;
+      border-left: 2px solid transparent;
+    }
+    .sb-nav a:hover, .sb-nav a.active {
+      background: var(--bg-3);
+      color: var(--text);
+      border-left-color: var(--blue);
+    }
+    .sb-nav a .icon { font-size: 14px; width: 18px; text-align: center; }
+
+    .sb-badge {
+      margin-left: auto;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      padding: 1px 6px;
+      color: var(--text-muted);
+    }
+
+    .sb-footer {
+      margin-top: auto;
+      padding: 16px 20px 0;
+      border-top: 1px solid var(--border);
+    }
+    .sb-links { display: flex; flex-direction: column; gap: 8px; }
+    .sb-links a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .sb-links a:hover { color: var(--blue); }
+
+    /* ── MAIN ── */
+    #main {
+      margin-left: 240px;
+      margin-top: 32px;
+      padding: 48px 56px;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    /* ── SECTIONS ── */
+    .section { margin-bottom: 64px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .section-header h2 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      margin-bottom: 64px;
+    }
+    .hero-prompt {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+    }
+    .hero-prompt span { color: var(--green); }
+    .hero-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .hero-name em { color: var(--blue); font-style: normal; }
+    .hero-title {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .hero-desc {
+      max-width: 580px;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.8;
+      border-left: 2px solid var(--blue);
+      padding-left: 16px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .stat-block { display: flex; flex-direction: column; }
+    .stat-n {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--blue);
+      line-height: 1;
+    }
+    .stat-l {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin-top: 4px;
+    }
+
+    /* ── SKILLS ── */
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .skill-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      transition: border-color .2s;
+    }
+    .skill-card:hover { border-color: var(--blue); }
+    .skill-card-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 10px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 4px;
+      border: 1px solid;
+    }
+    .tag-blue   { color: var(--blue);   border-color: rgba(88,166,255,.3);  background: rgba(88,166,255,.06); }
+    .tag-green  { color: var(--green);  border-color: rgba(63,185,80,.3);   background: rgba(63,185,80,.06); }
+    .tag-yellow { color: var(--yellow); border-color: rgba(227,179,65,.3);  background: rgba(227,179,65,.06); }
+    .tag-purple { color: var(--purple); border-color: rgba(163,113,247,.3); background: rgba(163,113,247,.06); }
+    .tag-red    { color: var(--red);    border-color: rgba(248,81,73,.3);   background: rgba(248,81,73,.06); }
+
+    /* ── PROJECTS ── */
+    .project-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      transition: border-color .2s;
+    }
+    .project-card:hover { border-color: var(--blue); }
+    .project-card-header {
+      background: var(--bg-3);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .project-card-prompt {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--green);
+      flex: 1;
+    }
+    .project-card-prompt span { color: var(--text-muted); }
+    .project-env-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+    .project-card-body { padding: 20px; }
+    .project-card-body h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .project-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .project-meta-item {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .project-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .project-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .project-sections { grid-template-columns: 1fr; } }
+    .proj-col-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 8px;
+    }
+    .proj-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .proj-list li {
+      font-size: 13px;
+      color: var(--text-muted);
+      padding-left: 14px;
+      position: relative;
+    }
+    .proj-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-size: 10px;
+      top: 3px;
+    }
+    .proj-list.green li::before { color: var(--green); }
+    .project-footer {
+      border-top: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* ── OTHER REALIZATIONS ── */
+    .real-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .real-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      transition: border-color .2s;
+    }
+    .real-card:hover { border-color: var(--green); }
+    .real-icon { font-size: 20px; margin-bottom: 8px; }
+    .real-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+    /* ── PROFILE ── */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 600px) { .profile-grid { grid-template-columns: 1fr; } }
+    .profile-item {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      transition: border-color .2s;
+    }
+    .profile-item:hover { border-color: var(--purple); }
+    .profile-item-icon { font-size: 18px; margin-top: 2px; }
+    .profile-item-text { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── CONTACT ── */
+    .contact-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .contact-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 13px;
+      transition: border-color .2s, color .2s;
+    }
+    .contact-card:hover { border-color: var(--blue); color: var(--text); }
+    .contact-card span.icon { font-size: 18px; }
+    .contact-card-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); }
+    .contact-card-value { font-size: 13px; }
+
+    /* ── UPDATE ── */
+    .update-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 48px;
+    }
+    .update-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      #sidebar { display: none; }
+      #main { margin-left: 0; padding: 24px 20px; }
+      .hero-stats { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div id="topbar">
+  <div class="tb-dot r"></div>
+  <div class="tb-dot y"></div>
+  <div class="tb-dot g"></div>
+  <span class="tb-path">~/portfolio</span>
+  <span class="tb-sep">—</span>
+  <span>romain@senumerique</span>
+  <div class="tb-right">
+    <span class="tb-pill">● disponible</span>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sb-avatar">RL</div>
+  <div class="sb-name">Romain LETOT</div>
+  <div class="sb-role">sysadmin@senumerique:~$</div>
+  <div class="sb-divider"></div>
+  <div class="sb-label">Navigation</div>
+  <div class="sb-nav">
+    <a href="#hero" class="active"><span class="icon">⌂</span> Accueil</a>
+    <a href="#profil"><span class="icon">◈</span> Profil</a>
+    <a href="#skills"><span class="icon">⚙</span> Compétences</a>
+    <a href="#projets"><span class="icon">◉</span> Projets <span class="sb-badge">2</span></a>
+    <a href="#autres"><span class="icon">◎</span> Réalisations</a>
+    <a href="#contact"><span class="icon">✉</span> Contact</a>
+  </div>
+  <div class="sb-footer">
+    <div class="sb-links">
+      <a href="https://github.com/senumerique" target="_blank">⌥ github.com/senumerique</a>
+      <a href="https://www.linkedin.com/in/romain-letot-250185138" target="_blank">⌥ linkedin.com/in/romain-letot</a>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main id="main">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-prompt"><span>$</span> cat about.txt</div>
+    <h1 class="hero-name">Romain<br /><em>LETOT</em></h1>
+    <div class="hero-title">Ingénieur Systèmes · Infrastructure</div>
+    <p class="hero-desc">
+      Administrateur systèmes avec <strong style="color:var(--text)">8 ans d'expérience</strong>, spécialisé dans la
+      conception, l'automatisation et l'évolution d'infrastructures fiables, sécurisées et scalables.
+      Ce portfolio présente une sélection de projets techniques réalisés en environnement professionnel.
+    </p>
+    <div class="hero-stats">
+      <div class="stat-block">
+        <span class="stat-n">8</span>
+        <span class="stat-l">ans d'expérience</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-n" style="color:var(--green)">×10</span>
+        <span class="stat-l">gain de vitesse déploiement</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-n" style="color:var(--purple)">N2/N3</span>
+        <span class="stat-l">niveau support</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFIL -->
+  <section class="section" id="profil">
+    <div class="section-header">
+      <h2>Profil</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-item">
+        <div class="profile-item-icon">🐧</div>
+        <div class="profile-item-text">Expertise systèmes <strong style="color:var(--text)">Linux & Windows</strong> en environnements on-premise et hybrides</div>
+      </div>
+      <div class="profile-item">
+        <div class="profile-item-icon">🔒</div>
+        <div class="profile-item-text">Forte orientation <strong style="color:var(--text)">sécurité & Windows Server</strong> — durcissement, patching, conformité</div>
+      </div>
+      <div class="profile-item">
+        <div class="profile-item-icon">⚡</div>
+        <div class="profile-item-text">Capacité à intervenir sur des <strong style="color:var(--text)">environnements complexes et critiques</strong></div>
+      </div>
+      <div class="profile-item">
+        <div class="profile-item-icon">📐</div>
+        <div class="profile-item-text">Approche orientée <strong style="color:var(--text)">architecture, performance et sécurité</strong></div>
+      </div>
+      <div class="profile-item">
+        <div class="profile-item-icon">🔄</div>
+        <div class="profile-item-text">Gestion et optimisation des processus, documentation et <strong style="color:var(--text)">transfert de compétences</strong></div>
+      </div>
+      <div class="profile-item">
+        <div class="profile-item-icon">🤝</div>
+        <div class="profile-item-text">Participation aux <strong style="color:var(--text)">choix d'architecture</strong> et support N2/N3</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPÉTENCES -->
+  <section class="section" id="skills">
+    <div class="section-header">
+      <h2>Stack technique</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-card">
+        <div class="skill-card-title">Systèmes</div>
+        <div class="skill-tags">
+          <span class="tag tag-blue">Linux RHEL</span>
+          <span class="tag tag-blue">Debian</span>
+          <span class="tag tag-blue">Windows Server</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Virtualisation</div>
+        <div class="skill-tags">
+          <span class="tag tag-yellow">VMware</span>
+          <span class="tag tag-yellow">Hyper-V</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Cloud</div>
+        <div class="skill-tags">
+          <span class="tag tag-blue">Azure</span>
+          <span class="tag tag-yellow">AWS</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Automatisation</div>
+        <div class="skill-tags">
+          <span class="tag tag-green">Bash</span>
+          <span class="tag tag-blue">PowerShell</span>
+          <span class="tag tag-yellow">Ansible</span>
+          <span class="tag tag-purple">Terraform</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Conteneurs</div>
+        <div class="skill-tags">
+          <span class="tag tag-blue">Docker</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Supervision</div>
+        <div class="skill-tags">
+          <span class="tag tag-red">Zabbix</span>
+          <span class="tag tag-yellow">Prometheus</span>
+          <span class="tag tag-green">Grafana</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Outils & CI/CD</div>
+        <div class="skill-tags">
+          <span class="tag tag-purple">Git</span>
+          <span class="tag tag-red">GitLab CI</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS -->
+  <section class="section" id="projets">
+    <div class="section-header">
+      <h2>Projets majeurs</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <!-- Projet 1 -->
+    <div class="project-card">
+      <div class="project-card-header">
+        <div class="project-card-prompt"><span>$</span> ./deploy --project patching-windows</div>
+        <span class="project-env-badge">on-premise</span>
+      </div>
+      <div class="project-card-body">
+        <h3>Patching OS & applicatif sur le parc Windows Serveur</h3>
+        <div class="project-meta">
+          <span class="project-meta-item">⬡ Windows Server</span>
+          <span class="project-meta-item">⬡ PowerShell</span>
+          <span class="project-meta-item">🔒 Sécurité SI</span>
+        </div>
+        <p class="project-desc">
+          Amélioration du déploiement et de l'application des patchs système Windows et applicatifs
+          sur un parc on-premise. Rôle de référent technique pour la partie Microsoft Windows Server.
+        </p>
+        <div class="project-sections">
+          <div>
+            <div class="proj-col-title">Actions principales</div>
+            <ul class="proj-list">
+              <li>Analyse de l'existant et audit du parc</li>
+              <li>Priorisation des déploiements critiques</li>
+              <li>Mise en place des tâches de patching OS</li>
+              <li>Mise en place des tâches de patching applicatif</li>
+              <li>Documentation et transfert de compétences</li>
+            </ul>
+          </div>
+          <div>
+            <div class="proj-col-title">Résultats</div>
+            <ul class="proj-list green">
+              <li>Amélioration de la compliance sur les patchs OS</li>
+              <li>Déploiements automatisés par lot (Pilote → Recette → Prod)</li>
+              <li>Maintien à jour des applications</li>
+              <li>Amélioration de la sécurité du SI</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="tag tag-blue">PowerShell</span>
+        <span class="tag tag-yellow">WSUS</span>
+        <span class="tag tag-red">Compliance</span>
+        <span class="tag tag-green">Automation</span>
+      </div>
+    </div>
+
+    <!-- Projet 2 -->
+    <div class="project-card">
+      <div class="project-card-header">
+        <div class="project-card-prompt"><span>$</span> ./deploy --project auto-deployment-windows</div>
+        <span class="project-env-badge">multi-clients</span>
+      </div>
+      <div class="project-card-body">
+        <h3>Automatisation des déploiements systèmes Windows Postes & Serveurs</h3>
+        <div class="project-meta">
+          <span class="project-meta-item">⬡ Windows</span>
+          <span class="project-meta-item">⬡ Scripting</span>
+          <span class="project-meta-item">⚡ Industrialisation</span>
+        </div>
+        <p class="project-desc">
+          Standardisation et fiabilisation des installations de postes et serveurs pour les clients.
+          Contexte de déploiements manuels chronophages et sources d'erreurs humaines.
+        </p>
+        <div class="project-sections">
+          <div>
+            <div class="proj-col-title">Actions principales</div>
+            <ul class="proj-list">
+              <li>Étude du besoin et des prérequis</li>
+              <li>Industrialisation des déploiements</li>
+              <li>Mise en place de contrôles et logs</li>
+            </ul>
+          </div>
+          <div>
+            <div class="proj-col-title">Résultats</div>
+            <ul class="proj-list green">
+              <li>Temps de déploiement divisé par 10</li>
+              <li>Diminution significative des erreurs humaines</li>
+              <li>Processus standardisé et reproductible</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="tag tag-blue">PowerShell</span>
+        <span class="tag tag-purple">MDT / WDS</span>
+        <span class="tag tag-green">Scripting</span>
+        <span class="tag tag-yellow">Logging</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTRES RÉALISATIONS -->
+  <section class="section" id="autres">
+    <div class="section-header">
+      <h2>Autres réalisations</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="real-grid">
+      <div class="real-card">
+        <div class="real-icon">🚨</div>
+        <p>Gestion d'incidents critiques niveau 3 sur des environnements de production</p>
+      </div>
+      <div class="real-card">
+        <div class="real-icon">📐</div>
+        <p>Participation aux choix d'architecture et pilotage technique des évolutions</p>
+      </div>
+      <div class="real-card">
+        <div class="real-icon">📊</div>
+        <p>Amélioration de la supervision et des alertes (Zabbix, Prometheus, Grafana)</p>
+      </div>
+      <div class="real-card">
+        <div class="real-icon">🛡️</div>
+        <p>Renforcement de la sécurité systèmes et durcissement des configurations</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="section-header">
+      <h2>Contact & liens</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-row">
+      <a class="contact-card" href="https://github.com/senumerique" target="_blank">
+        <span class="icon">⌥</span>
+        <div>
+          <div class="contact-card-label">GitHub</div>
+          <div class="contact-card-value">senumerique</div>
+        </div>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/romain-letot-250185138" target="_blank">
+        <span class="icon">🔗</span>
+        <div>
+          <div class="contact-card-label">LinkedIn</div>
+          <div class="contact-card-value">romain-letot</div>
+        </div>
+      </a>
+      <a class="contact-card" href="https://github.com/senumerique/portfolio-infra/blob/main/CV_Romain_LETOT.pdf" target="_blank">
+        <span class="icon">📄</span>
+        <div>
+          <div class="contact-card-label">Curriculum Vitæ</div>
+          <div class="contact-card-value">Télécharger le PDF</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="update-tag">
+    <div class="update-dot"></div>
+    Dernière mise à jour : juin 2026
+  </div>
+
+</main>
+
+<script>
+  // Active sidebar link on scroll
+  const sections = document.querySelectorAll('section[id], #hero');
+  const links = document.querySelectorAll('.sb-nav a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.sb-nav a[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
