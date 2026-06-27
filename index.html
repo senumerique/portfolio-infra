@@ -178,9 +178,77 @@
       margin-left: 240px;
       margin-top: 32px;
       padding: 48px 56px;
-      max-width: 900px;
-      width: 100%;
+      flex: 1;
+      min-width: 0;
     }
+
+    /* ── TIMELINE FORMATIONS ── */
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: var(--border);
+    }
+    .tl-item {
+      position: relative;
+      margin-bottom: 28px;
+    }
+    .tl-item:last-child { margin-bottom: 0; }
+    .tl-dot {
+      position: absolute;
+      left: -25px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--bg-2);
+      border: 2px solid var(--blue);
+      z-index: 1;
+    }
+    .tl-dot.green  { border-color: var(--green); }
+    .tl-dot.yellow { border-color: var(--yellow); }
+    .tl-dot.purple { border-color: var(--purple); }
+    .tl-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      transition: border-color .2s;
+    }
+    .tl-card:hover { border-color: var(--blue); }
+    .tl-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+    .tl-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .tl-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-dim);
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+    .tl-school {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .tl-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
 
     /* ── SECTIONS ── */
     .section { margin-bottom: 64px; }
@@ -505,6 +573,7 @@
     <a href="#profil"><span class="icon">◈</span> Profil</a>
     <a href="#skills"><span class="icon">⚙</span> Compétences</a>
     <a href="#projets"><span class="icon">◉</span> Projets <span class="sb-badge">2</span></a>
+    <a href="#formations"><span class="icon">🎓</span> Formations</a>
     <a href="#autres"><span class="icon">◎</span> Réalisations</a>
     <a href="#contact"><span class="icon">✉</span> Contact</a>
   </div>
@@ -737,6 +806,86 @@
         <span class="tag tag-green">Scripting</span>
         <span class="tag tag-yellow">Logging</span>
       </div>
+    </div>
+  </section>
+
+  <!-- FORMATIONS -->
+  <section class="section" id="formations">
+    <div class="section-header">
+      <h2>Diplômes & Formations</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline">
+
+      <!-- Formation récente Azure -->
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <div class="tl-card" style="border-color: rgba(63,185,80,.3);">
+          <div class="tl-card-top">
+            <div class="tl-title">Maîtriser Microsoft Entra ID</div>
+            <div class="tl-date">juin 2026</div>
+          </div>
+          <div class="tl-school">Formation Microsoft Azure</div>
+          <div class="tl-badges">
+            <span class="tag tag-blue">Azure</span>
+            <span class="tag tag-purple">Entra ID</span>
+            <span class="tag tag-green">✓ Obtenu</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Habilitation électrique -->
+      <div class="tl-item">
+        <div class="tl-dot yellow"></div>
+        <div class="tl-card">
+          <div class="tl-card-top">
+            <div class="tl-title">Habilitation électrique H0B0</div>
+            <div class="tl-date"></div>
+          </div>
+          <div class="tl-school">Habilitation à intervenir en zone électrique basse tension</div>
+          <div class="tl-badges">
+            <span class="tag tag-yellow">H0B0</span>
+            <span class="tag tag-green">✓ Obtenu</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Master -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-card-top">
+            <div class="tl-title">Master I — Administrateur Systèmes et Réseaux</div>
+            <div class="tl-date">sept. 2017 → août 2020</div>
+          </div>
+          <div class="tl-school">ENI École Informatique · Saint-Herblain</div>
+        </div>
+      </div>
+
+      <!-- BTS -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-card-top">
+            <div class="tl-title">BTS SIO option Solutions Informatiques Système et Réseau</div>
+            <div class="tl-date">sept. 2015 → juil. 2017</div>
+          </div>
+          <div class="tl-school">Lycée Chevrollier · Angers</div>
+        </div>
+      </div>
+
+      <!-- BAC PRO -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-card-top">
+            <div class="tl-title">BAC PRO SEN option Télécoms et Réseaux</div>
+            <div class="tl-date">sept. 2012 → juil. 2015</div>
+          </div>
+          <div class="tl-school">LDM Sully · Nogent-le-Rotrou</div>
+        </div>
+      </div>
+
     </div>
   </section>
 
