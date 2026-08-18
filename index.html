@@ -122,7 +122,7 @@
   <div class="sb-role">sysadmin@senumerique:~$</div>
   <div class="sb-divider"></div>
   <div class="sb-label">Navigation</div>
-  <div class="sb-nav"><a href="#hero"><span class="icon">⌂</span> Accueil</a><a href="#profil"><span class="icon">◈</span> Profil</a><a href="#skills"><span class="icon">⚙</span> Compétences</a><a href="#projets"><span class="icon">◉</span> Projets<span class="sb-badge">2</span></a><a href="#formations"><span class="icon">🎓</span> Formations</a><a href="#autres"><span class="icon">◎</span> Réalisations</a><a href="#contact"><span class="icon">✉</span> Contact</a></div>
+  <div class="sb-nav"><a href="#hero"><span class="icon">⌂</span> Accueil</a><a href="#profil"><span class="icon">◈</span> Profil</a><a href="#skills"><span class="icon">⚙</span> Compétences</a><a href="#projets"><span class="icon">◉</span> Projets<span class="sb-badge">3</span></a><a href="#formations"><span class="icon">🎓</span> Formations</a><a href="#autres"><span class="icon">◎</span> Réalisations</a><a href="#contact"><span class="icon">✉</span> Contact</a></div>
   <div class="sb-footer">
     <div class="sb-links">
       <a href="https://github.com/senumerique" target="_blank">⌥ github.com/senumerique</a>
@@ -279,6 +279,32 @@
         <span class="tag tag-blue">PowerShell</span><span class="tag tag-purple">MDT / WDS</span><span class="tag tag-green">Scripting</span><span class="tag tag-yellow">Logging</span>
       </div>
     </div>
+    <div class="project-card">
+      <div class="project-card-header">
+        <div class="project-card-prompt"><span>$</span> ./deploy --project Set-TieringModel</div>
+        <span class="project-env-badge">On-Premise</span>
+      </div>
+      <div class="project-card-body">
+        <h3>Mise en place du Tiering Model dans l'Active Directory</h3>
+        <div class="project-meta">
+          <span class="project-meta-item">⬡ Scripting PowerShell</span><span class="project-meta-item">⬡ Active Directory</span><span class="project-meta-item">⬡ GPO</span><span class="project-meta-item">⬡ DRA (Directory and Resource Administrator)</span><span class="project-meta-item">⬡ GPA (Group Policy Administrator)</span>
+        </div>
+        <p class="project-desc">Mise en place du Tiering Model de Microsoft sur l'arborescence OU d'un domaine existant. Refonte de l'arborescence OU, adaptation des links GPO, des délégations, et des connexions avec les applications et process.</p>
+        <div class="project-sections">
+          <div>
+            <div class="proj-col-title">Actions principales</div>
+            <ul class="proj-list"><li>Étude du besoin et des impacts</li><li>Estimation des ressources nécessaires</li><li>Préparation via une matrice</li><li>Exécution de la bascule en maquette</li><li>Mise en place en production par Tier (en cours...)</li></ul>
+          </div>
+          <div>
+            <div class="proj-col-title">Résultats</div>
+            <ul class="proj-list green"><li>Renforcement de la sécurité</li><li>Meilleur gestion d'audit et de traçabilité des objets dans l'AD</li><li>Limitation des accès au différents périmètres fonctionnels</li><li>Conformité avec les best practice Microsoft</li></ul>
+          </div>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="tag tag-blue">PowerShell</span><span class="tag tag-green">Active Directory</span><span class="tag tag-red">GPO</span><span class="tag tag-yellow">RDM</span><span class="tag tag-purple">Directory and Resource Administrator</span><span class="tag tag-green">Group Policy Admiistrator</span>
+      </div>
+    </div>
   </section>
   <section class="section" id="formations">
     <div class="section-header"><h2>Diplômes &amp; Formations</h2><div class="section-line"></div></div>
@@ -384,7 +410,7 @@
         </div>
       </a></div>
   </section>
-  <div class="update-tag"><div class="update-dot"></div>Dernière mise à jour : juin 2026</div>
+  <div class="update-tag"><div class="update-dot"></div>Dernière mise à jour : août 2026</div>
 </main>
 <script>
   const sections = document.querySelectorAll('section[id]');
